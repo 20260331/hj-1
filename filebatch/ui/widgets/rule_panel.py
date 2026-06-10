@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import Vertical, Horizontal
-from textual.message import Message
-from textual.widgets import Input, Static, Checkbox, Button, Select
+from textual.widgets import Input, Static, Checkbox, Button
 
 from filebatch.rules.find_replace import FindReplaceConfig, FindReplaceRule
 from filebatch.rules.rename import RenameConfig, RenameRule
@@ -37,11 +36,6 @@ class RulePanel(Vertical):
         }
     }
     """
-
-    class RulesChanged(Message):
-        def __init__(self, rules: list[Rule]) -> None:
-            super().__init__()
-            self.rules = rules
 
     def compose(self) -> ComposeResult:
         yield Static("⚙️ Batch Rules", id="rule-title")

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import Vertical
+from textual.containers import Vertical, Horizontal
 from textual.message import Message
 from textual.widgets import Input, Static, Checkbox
 
