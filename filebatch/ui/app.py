@@ -6,11 +6,10 @@ from textual.app import App, ComposeResult
 from textual.containers import Vertical, Horizontal
 from textual.widgets import Header, Footer, Button, Static, ProgressBar
 
-from filebatch.core.scanner import FileScanner, FileInfo
+from filebatch.core.scanner import FileInfo
 from filebatch.core.filter import FilterEngine, FilterConfig
-from filebatch.core.engine import BatchEngine, BatchResult
+from filebatch.core.engine import BatchEngine
 from filebatch.core.logger import BatchLogger
-from filebatch.rules.base import Rule
 
 from filebatch.ui.widgets.directory_selector import DirectorySelector
 from filebatch.ui.widgets.filter_panel import FilterPanel
@@ -32,7 +31,7 @@ class FileBatchApp(App):
     }
 
     #left-panel {
-        width: 38;
+        width: 42;
         height: 1fr;
         overflow-y: auto;
         border: none;
