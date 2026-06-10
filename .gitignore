@@ -1,0 +1,15 @@
+# Added by git_init_ignore
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+# Python
+__pycache__/
+*.py[cod]
+prompts.md
+temp.md
+gh_push_record.md
