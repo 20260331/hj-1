@@ -85,3 +85,13 @@ class FilterPanel(Vertical):
     def on_input_changed(self, event: Input.Changed) -> None:
         if event.input.id and event.input.id.startswith("filter-"):
             self.post_message(self.FilterChanged(self.get_config()))
+
+    def reset(self) -> None:
+        for control_id in (
+            "#filter-extensions",
+            "#filter-pattern",
+            "#filter-regex",
+            "#filter-min-size",
+            "#filter-max-size",
+        ):
+            self.query_one(control_id, Input).value = ""

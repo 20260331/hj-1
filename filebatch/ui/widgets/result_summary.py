@@ -46,7 +46,8 @@ class ResultSummary(Vertical):
         summary = self.query_one("#result-title", Static)
         summary.update(
             f"📊 Results  |  "
-            f"Total: {result.total}  |  "
+            f"Files: {result.total_files}  |  "
+            f"Ops: {result.total_operations}  |  "
             f"✅ {result.success}  |  "
             f"❌ {result.failed}  |  "
             f"⏭️ {result.skipped}"
@@ -66,7 +67,8 @@ class ResultSummary(Vertical):
         summary = self.query_one("#result-title", Static)
         summary.update(
             f"📊 Results  |  "
-            f"Total: {result.total}  |  "
+            f"Files: {result.total_files}  |  "
+            f"Ops: {result.total_operations}  |  "
             f"✅ {result.success}  |  "
             f"❌ {result.failed}  |  "
             f"⏭️ {result.skipped}"

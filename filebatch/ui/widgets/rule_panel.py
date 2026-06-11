@@ -90,3 +90,22 @@ class RulePanel(Vertical):
             rules.append(RenameRule(rn_config))
 
         return rules
+
+    def reset(self) -> None:
+        for control_id in (
+            "#fr-find",
+            "#fr-replace",
+            "#fr-encoding",
+            "#rn-pattern",
+            "#rn-replace",
+        ):
+            input_widget = self.query_one(control_id, Input)
+            input_widget.value = "utf-8" if control_id == "#fr-encoding" else ""
+
+        for control_id, value in (
+            ("#fr-regex", False),
+            ("#fr-case", True),
+            ("#rn-regex", False),
+            ("#rn-case", True),
+        ):
+            self.query_one(control_id, Checkbox).value = value

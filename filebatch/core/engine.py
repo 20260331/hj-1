@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -11,7 +10,8 @@ from filebatch.core.logger import BatchLogger
 
 @dataclass
 class BatchResult:
-    total: int = 0
+    total_files: int = 0
+    total_operations: int = 0
     success: int = 0
     failed: int = 0
     skipped: int = 0
@@ -20,7 +20,8 @@ class BatchResult:
     @property
     def summary(self) -> str:
         return (
-            f"Total: {self.total} | "
+            f"Files: {self.total_files} | "
+            f"Operations: {self.total_operations} | "
             f"Success: {self.success} | "
             f"Failed: {self.failed} | "
             f"Skipped: {self.skipped}"
@@ -40,7 +41,7 @@ class BatchEngine:
         self._on_result = callback
 
     def execute(self, files: list[FileInfo], rules: list[Rule], dry_run: bool = False) -> BatchResult:
-        result = BatchResult(total=len(files))
+        result = BatchResult(total_files=len(files))
         self.logger.info(f"Batch started: {len(files)} files, {len(rules)} rules, dry_run={dry_run}")
 
         for idx, info in enumerate(files):
@@ -50,6 +51,7 @@ class BatchEngine:
             for rule in rules:
                 try:
                     rule_result = rule.apply(info, dry_run=dry_run)
+                    result.total_operations += 1
                     result.details.append(rule_result)
 
                     if rule_result.skipped:
@@ -66,6 +68,7 @@ class BatchEngine:
                         self._on_result(rule_result)
 
                 except Exception as exc:
+                    result.total_operations += 1
                     result.failed += 1
                     err_result = RuleResult(
                         file_path=info.path,
